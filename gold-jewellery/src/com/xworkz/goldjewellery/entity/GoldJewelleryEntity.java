@@ -6,8 +6,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.Length;
 
 import com.xworkz.goldjewellery.credentials.JewelleryCredential;
 
@@ -21,7 +27,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name="gold_jewellery")
+@Table(name="jewellery")
 
 @NamedQuery(name="findByShopNameAndId", 
 query="select jewellery from GoldJewelleryEntity jewellery where jewellery.shopName=:sh and jewellery.id=:i")
@@ -37,9 +43,17 @@ public class GoldJewelleryEntity {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@NotBlank
 	private int id;
+	@NotNull
+	@NotEmpty
+	@Size(min=1 , max=90, message="ship name is vallid")
 	private String shopName;
+	@NotNull
+	@NotEmpty
+	@Length(min=1 , max=50, message="type is valid")
 	private JewelleryCredential type;
+	@Min (value=1 , message="goldPrice is valid")
 	private double goldPrice;
 	private double gstPrice;
 	private double gram;
