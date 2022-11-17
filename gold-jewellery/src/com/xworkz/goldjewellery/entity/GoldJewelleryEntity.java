@@ -1,11 +1,14 @@
 package com.xworkz.goldjewellery.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
@@ -27,7 +30,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name="jewellery")
+@Table(name="gold_jewellery")
 
 @NamedQuery(name="findByShopNameAndId", 
 query="select jewellery from GoldJewelleryEntity jewellery where jewellery.shopName=:sh and jewellery.id=:i")
@@ -43,21 +46,22 @@ public class GoldJewelleryEntity {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@NotBlank
 	private int id;
 	@NotNull
 	@NotEmpty
 	@Size(min=1 , max=90, message="ship name is vallid")
 	private String shopName;
-	@NotNull
-	@NotEmpty
-	@Length(min=1 , max=50, message="type is valid")
+	@Enumerated(EnumType.STRING)
 	private JewelleryCredential type;
-	@Min (value=1 , message="goldPrice is valid")
+	@DecimalMin(value="0.0" , message="goldPrice is valid")
 	private double goldPrice;
+	@DecimalMin(value="0.0" , message="gstPrice is valid")
 	private double gstPrice;
+	@DecimalMin(value="0.0" , message="gram is valid")
 	private double gram;
+	@DecimalMin(value="0.0" , message="makingCharges is valid")
 	private double makingCharges;
+	@DecimalMin(value="0.0" , message="wastageCharges is valid")
 	private double wastageCharges;
 	private boolean copper;
 	

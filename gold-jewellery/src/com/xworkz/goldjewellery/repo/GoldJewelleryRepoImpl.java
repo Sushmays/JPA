@@ -130,15 +130,15 @@ public class GoldJewelleryRepoImpl implements GoldJewelleryRepo {
 	}
 
 	@Override
-	public Optional<GoldJewelleryEntity> findTotalPriceByGramAndShopName(double gram, String shopName) {
+	public Optional<Double> findTotalPriceByGramAndShopName(double gram, String shopName) {
 		EntityManager manage= factory.createEntityManager();
 		try {
-			Query query= manage.createNamedQuery("findShopNameById");
+			Query query= manage.createNamedQuery("findTotalPriceByGramAndShopName");
 			query.setParameter("gr", gram);
 			query.setParameter("sn", shopName);
 			Object  obj=query.getSingleResult();
 			if(obj != null) {
-				GoldJewelleryEntity ent=(GoldJewelleryEntity) obj;
+				Double ent=(Double) obj;
 				return Optional.of(ent);
 			}
 		}

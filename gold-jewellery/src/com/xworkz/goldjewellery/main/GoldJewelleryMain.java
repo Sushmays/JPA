@@ -43,12 +43,14 @@ public class GoldJewelleryMain {
 		GoldJewelleryEntity goldJewelleryEntity= findByShopNameAndId.get();
 		System.out.println(goldJewelleryEntity);
 	}
+	System.out.println("==============findShopNameById===============");
 	
-	Optional<String> findShopNameById= jewelleryService.findShopNameById(7);
+	Optional<String> findShopNameById= jewelleryService.findShopNameById(10);
 	if(findShopNameById.isPresent()) {
 		String string= findShopNameById.get();
 		System.out.println(string);
 	}
+	System.out.println("==============findMakingChargesByShopName===============");
 	
 	Optional<Double> findMakingChargesByShopName= jewelleryService.findMakingChargesByShopName("Joyalukkas");
 	if(findMakingChargesByShopName.isPresent()) {
@@ -56,15 +58,21 @@ public class GoldJewelleryMain {
 		System.out.println(doub);
 	}
 	
+	System.out.println("==============findWastageChargesAndMakingChargesByShopName===============");
+	
 	Optional<Object[]> findWastageChargesAndMakingChargesByShopName= jewelleryService.findWastageChargesAndMakingChargesByShopName("Joyalukkas");
 	if(findWastageChargesAndMakingChargesByShopName.isPresent()) {
 		Object[] array= findWastageChargesAndMakingChargesByShopName.get();
-		System.out.println(array);
+		for (Object object : array) {
+			System.out.println(object);
+		}
 	}
 	
-	Optional<GoldJewelleryEntity> findTotalPriceByGramAndShopName= jewelleryService.findTotalPriceByGramAndShopName(3, "GRT Jewellers");
+	System.out.println("==============findTotalPriceByGramAndShopName===============");
+	
+	Optional<Double> findTotalPriceByGramAndShopName= jewelleryService.findTotalPriceByGramAndShopName(3, "GRT Jewellers");
 	if(findTotalPriceByGramAndShopName.isPresent()) {
-		GoldJewelleryEntity goldEntity= findTotalPriceByGramAndShopName.get();
+		Double goldEntity= findTotalPriceByGramAndShopName.get();
 		System.out.println(goldEntity);
 	}
 	
