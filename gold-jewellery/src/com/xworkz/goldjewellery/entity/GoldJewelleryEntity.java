@@ -41,7 +41,13 @@ query="select jewellery.makingCharges from GoldJewelleryEntity jewellery where j
 query="select jewellery.wastageCharges, jewellery.makingCharges from GoldJewelleryEntity jewellery where jewellery.shopName=:sp")
 @NamedQuery(name="findTotalPriceByGramAndShopName", 
 query="select sum(goldPrice+gstPrice+makingCharges+wastageCharges) from GoldJewelleryEntity jewellery where jewellery.shopName=:sn and jewellery.gram=:gr")
-
+@NamedQuery(name = "findAll", query = "select jewellery from GoldJewelleryEntity jewellery")
+@NamedQuery(name = "getAllShopName", query = "select jewellery.shopName from GoldJewelleryEntity jewellery")
+@NamedQuery(name = "getAllShopNameAndType", query = "select jewellery.shopName , jewellery.type from GoldJewelleryEntity jewellery")
+@NamedQuery(name = "findAllByMakingChargesGreaterThan", query = "select jewellery from GoldJewelleryEntity jewellery where jewellery.makingCharges>:mc")
+@NamedQuery(name = "findAllByMakingChargesLesserThan", query = "select jewellery from GoldJewelleryEntity jewellery where jewellery.makingCharges<:mch")
+@NamedQuery(name = "findAllByWastageChargesGreaterThanAndMakingChargesGreaterThan", 
+query = "select jewellery from GoldJewelleryEntity jewellery where jewellery.wastageCharges>:wast and jewellery.makingCharges>:mak")
 public class GoldJewelleryEntity {
 	
 	@Id

@@ -1,5 +1,6 @@
 package com.xworkz.goldjewellery.service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -74,6 +75,42 @@ public class GoldJewelleryServiceImpl implements GoldJewelleryService {
 	public Optional<Double> findTotalPriceByGramAndShopName(double gram, String shopName) {
 
 		return repo.findTotalPriceByGramAndShopName(gram, shopName);
+	}
+
+	@Override
+	public Collection<GoldJewelleryEntity> findAll() {
+		
+		return repo.findAll();
+	}
+
+	@Override
+	public Collection<String> getAllShopName() {
+		
+		return repo.getAllShopName();
+	}
+
+	@Override
+	public Collection<Object[]> getAllShopNameAndType() {
+		
+		return repo.getAllShopNameAndType();
+	}
+
+	@Override
+	public Optional<Collection<GoldJewelleryEntity>> findAllByMakingChargesGreaterThan(double charges) {
+		
+		return repo.findAllByMakingChargesGreaterThan(charges);
+	}
+
+	@Override
+	public Optional<Collection<GoldJewelleryEntity>> findAllByMakingChargesLesserThan(double charges) {
+			
+		return repo.findAllByMakingChargesLesserThan(charges);
+	}
+
+	@Override
+	public Optional<Collection<GoldJewelleryEntity>> findAllByWastageChargesGreaterThanAndMakingChargesGreaterThan(
+			double charges, double makingCharges) {
+		return repo.findAllByWastageChargesGreaterThanAndMakingChargesGreaterThan(charges, makingCharges);
 	}
 
 }
